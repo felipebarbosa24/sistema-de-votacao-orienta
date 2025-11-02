@@ -50,7 +50,7 @@ Certifique-se de ter o Node.js e o npm (ou yarn/pnpm) instalados em sua máquina
     ```
 2.  Instale as dependências:
     ```bash
-    npm install
+    npm install --legacy-peer-deps
     # ou yarn install
     # ou pnpm install
     ```
