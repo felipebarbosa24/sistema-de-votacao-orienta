@@ -45,7 +45,7 @@ Certifique-se de ter o Node.js e o npm (ou yarn/pnpm) instalados em sua máquina
 
 1.  Clone o repositório:
     ```bash
-    git clone https://github.com/felipebarbosa24/sistema-de-votacao-orienta.git
+    git clone https://github.com/felipebarbosa24/sistema-de-votacao-ORIENTA-FRONT.git
     cd sistema-votacao-orienta
     ```
 2.  Instale as dependências:
