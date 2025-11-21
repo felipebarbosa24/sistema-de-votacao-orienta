@@ -101,7 +101,7 @@ export default function AdminDashboardPage() {
             <CardContent className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <Button
                 onClick={() => router.push("/admin/eleicoes/nova")}
-                className="h-16 bg-primary hover:bg-primary-dark text-white rounded-xl gap-2 text-base"
+                className="h-16 bg-[#1e237e] hover:bg-primary-dark text-white rounded-xl gap-2 text-base"
               >
                 <PlusCircle className="h-5 w-5" />
                 Criar Nova Eleição
@@ -138,7 +138,7 @@ export default function AdminDashboardPage() {
                   <p className="text-muted-foreground mb-4">Nenhuma eleição criada ainda</p>
                   <Button
                     onClick={() => router.push("/admin/eleicoes/nova")}
-                    className="bg-primary hover:bg-primary-dark text-white rounded-xl gap-2"
+                    className="bg-[#1e237e] hover:bg-primary-dark text-white rounded-xl gap-2"
                   >
                     <PlusCircle className="h-4 w-4" />
                     Criar Primeira Eleição
@@ -174,7 +174,7 @@ export default function AdminDashboardPage() {
                           onClick={() => router.push(`/admin/eleicoes/${election.id}`)}
                           variant="outline"
                           size="sm"
-                          className="rounded-xl"
+                          className="bg-[#1e237e] text-white hover:bg-primary-dark hover:text-white rounded-xl"
                         >
                           Ver Detalhes
                         </Button>

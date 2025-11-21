@@ -206,7 +206,7 @@ export default function NewElectionPage() {
                   </Button>
                   <Button
                     type="submit"
-                    className="flex-1 h-12 bg-primary hover:bg-primary-dark text-white rounded-xl font-semibold"
+                    className="flex-1 h-12 bg-[#1e237e] hover:bg-primary-dark text-white rounded-xl font-semibold"
                   >
                     Criar Eleição
                   </Button>

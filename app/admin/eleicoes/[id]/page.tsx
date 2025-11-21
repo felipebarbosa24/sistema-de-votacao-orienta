@@ -93,7 +93,7 @@ export default function ElectionDetailsPage() {
                   Encerrar Eleição
                 </Button>
               )}
-              <Button onClick={exportResults} className="gap-2 rounded-xl bg-primary hover:bg-primary-dark text-white">
+              <Button onClick={exportResults} className="gap-2 rounded-xl bg-[#1e237e] hover:bg-primary-dark text-white">
                 <Download className="h-4 w-4" />
                 Exportar Relatório
               </Button>
