@@ -11,8 +11,8 @@ import { Label } from "@/components/ui/label"
 import { Eye, EyeOff } from "lucide-react"
 
 const ADMIN_CREDENTIALS = {
-  username: "Morpheus AdMiN",
-  password: "#$adminETEjBl*201125@qwerty$#",
+  username: "ivaniltonadm",
+  password: "admin123",
 }
 
 export default function AdminLoginPage() {

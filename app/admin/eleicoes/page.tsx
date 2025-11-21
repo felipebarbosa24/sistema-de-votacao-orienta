@@ -61,7 +61,7 @@ export default function ElectionsManagementPage() {
             </Button>
             <Button
               onClick={() => router.push("/admin/eleicoes/nova")}
-              className="bg-[#1e237e] hover:bg-primary-dark text-white rounded-xl gap-2"
+              className="bg-[#00c23d] hover:bg-[#006e32] text-white rounded-xl gap-2"
             >
               <PlusCircle className="h-4 w-4" />
               Nova Eleição
@@ -125,7 +125,7 @@ export default function ElectionsManagementPage() {
                             onClick={() => router.push(`/admin/eleicoes/${election.id}`)}
                             variant="outline"
                             size="sm"
-                            className="bg-success hover:bg-success/90 rounded-xl gap-2 text-white hover:text-green-700 hover:bg-orange-50"
+                            className="bg-[#008BDA] text-white hover:bg-[#004e84] hover:text-white rounded-xl"
                           >
                             <Eye className="h-4 w-4" />
                             Ver Detalhes
@@ -145,7 +145,7 @@ export default function ElectionsManagementPage() {
                             onClick={() => handleDeleteElection(election.id)}
                             variant="outline"
                             size="sm"
-                            className="rounded-xl gap-2 text-danger hover:text-danger hover:bg-red-50 bg-[#CF0E0E] rounded-xl gap-2 text-white hover:text-red-700"
+                            className="rounded-xl gap-2 text-danger hover:text-danger hover:bg-red-50"
                           >
                             <Trash2 className="h-4 w-4" />
                             Excluir
