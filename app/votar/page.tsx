@@ -56,7 +56,7 @@ export default function VotingBallotPage() {
         <div className="w-full max-w-2xl">
           <div className="bg-white rounded-2xl shadow-card p-10 border border-neutral-200">
             <div className="bg-[#1e237e] text-white py-4 px-6 rounded-xl mb-8 -mx-2">
-              <h2 className="text-xl font-bold text-center uppercase">Cédula de Votação - {election.title}</h2>
+              <h2 className="text-xl font-bold text-center uppercase">Cédula Votação - {election.title}</h2>
             </div>
 
             <div className="space-y-4 mb-8">
