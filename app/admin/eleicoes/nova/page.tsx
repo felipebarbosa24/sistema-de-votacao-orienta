@@ -84,7 +84,7 @@ export default function NewElectionPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#f5f5f5]">
-      <Header title="NOVA ELEIÇÃO" variant="admin" />
+      <Header title="CRIAR ELEIÇÃO" variant="admin" />
 
       <main className="flex-1 p-4 py-8">
         <div className="container mx-auto max-w-4xl">

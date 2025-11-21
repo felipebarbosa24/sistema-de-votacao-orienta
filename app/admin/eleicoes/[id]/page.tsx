@@ -7,6 +7,8 @@ import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { storage, type Election } from "@/lib/storage"
+import jsPDF from "jspdf"
+import autoTable from "jspdf-autotable"
 import { ArrowLeft, Lock, Download, Users, BarChart3 } from "lucide-react"
 
 export default function ElectionDetailsPage() {
@@ -40,28 +42,87 @@ export default function ElectionDetailsPage() {
   }
 
   const exportResults = () => {
-    if (!election) return
+    if (!election) return;
 
-    const totalVotes = Object.values(election.votes).reduce((a, b) => a + b, 0)
-    const results = election.chapas
-      .map((chapa) => {
-        const votes = election.votes[chapa.id] || 0
-        const percentage = totalVotes > 0 ? ((votes / totalVotes) * 100).toFixed(2) : "0.00"
-        return `Chapa ${chapa.number} - ${chapa.name}: ${votes} votos (${percentage}%)`
-      })
-      .join("\n")
+    const primaryColor = "#1e237e";
+    const textColor = "#333333";
+    const headerTextColor = "#FFFFFF";
+    const footerTextColor = "#777777";
+    const rowEvenColor = "#f5f5f5";
 
-    const content = `RELATÓRIO DE ELEIÇÃO\n\n${election.title}\n${election.description}\n\nStatus: ${
-      election.status === "open" ? "Aberta" : "Fechada"
-    }\nTotal de Votos: ${totalVotes}\nTotal de Eleitores: ${election.voters.length}\n\nRESULTADOS:\n\n${results}\n\nELEITORES:\n\n${election.voters.map((v) => `${v.name} (CPF: ${v.cpf}) - Votou em: ${new Date(v.votedAt).toLocaleString("pt-BR")}`).join("\n")}`
+    const doc = new jsPDF();
+    const totalVotes = Object.values(election.votes).reduce((a, b) => a + b, 0);
+    const pageHeight = doc.internal.pageSize.getHeight();
+    const pageWidth = doc.internal.pageSize.getWidth();
 
-    const blob = new Blob([content], { type: "text/plain" })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement("a")
-    a.href = url
-    a.download = `relatorio-${election.id}.txt`
-    a.click()
-    URL.revokeObjectURL(url)
+    const footerText = "Projeto desenvolvido pelo ORIENTA - Organização e Integração Educacional e Novas Trajetórias de Aprendizagem, FACEPE - Fundação de Amparo à Ciência e Tecnologia do Estado de Pernambuco, Capyvara Company.";
+
+    // Título do Documento
+    doc.setFontSize(18);
+    doc.setFont("helvetica", "bold");
+    doc.setTextColor(primaryColor);
+    doc.text("Relatório Oficial de Eleição", 14, 22);
+
+    doc.setFontSize(14);
+    doc.setFont("helvetica", "normal");
+    doc.setTextColor(textColor);
+    doc.text(election.title, 14, 30);
+    doc.setDrawColor(primaryColor);
+    doc.line(14, 33, pageWidth - 14, 33); // Linha abaixo do título
+
+    // Informações Gerais
+    autoTable(doc, {
+      startY: 42,
+      head: [["Status", "Total de Votos", "Total de Eleitores"]],
+      body: [[
+        election.status === "open" ? "Aberta" : "Fechada",
+        totalVotes.toString(),
+        election.voters.length.toString(),
+      ]],
+      theme: 'grid',
+      headStyles: { fillColor: primaryColor, textColor: headerTextColor },
+      styles: { textColor: textColor, font: 'helvetica' },
+    });
+
+    // Resultados por Chapa
+    doc.setFontSize(12);
+    doc.setFont("helvetica", "bold");
+    doc.text("Resultados por Chapa", 14, (doc as any).lastAutoTable.finalY + 12);
+    autoTable(doc, {
+      startY: (doc as any).lastAutoTable.finalY + 15,
+      head: [["Número", "Nome da Chapa", "Votos", "Percentual"]],
+      body: election.chapas.map(chapa => {
+        const votes = election.votes[chapa.id] || 0;
+        const percentage = totalVotes > 0 ? ((votes / totalVotes) * 100).toFixed(2) + "%" : "0.00%";
+        return [chapa.number, chapa.name, votes, percentage];
+      }),
+      theme: 'grid',
+      headStyles: { fillColor: primaryColor, textColor: headerTextColor },
+      styles: { textColor: textColor, font: 'helvetica' },
+      alternateRowStyles: { fillColor: rowEvenColor },
+    });
+
+    // Lista de Eleitores
+    doc.setFontSize(12);
+    doc.setFont("helvetica", "bold");
+    doc.text("Eleitores Votantes (ATA)", 14, (doc as any).lastAutoTable.finalY + 12);
+    autoTable(doc, {
+      startY: (doc as any).lastAutoTable.finalY + 15,
+      head: [["Nome", "CPF", "Data do Voto"]],
+      body: election.voters.map(voter => [voter.name, voter.cpf, new Date(voter.votedAt).toLocaleString('pt-BR')]),
+      theme: 'grid',
+      headStyles: { fillColor: primaryColor, textColor: headerTextColor },
+      styles: { textColor: textColor, font: 'helvetica' },
+      alternateRowStyles: { fillColor: rowEvenColor },
+      didDrawPage: (data) => {
+        doc.setFontSize(8);
+        doc.setTextColor(footerTextColor);
+        const textLines = doc.splitTextToSize(footerText, pageWidth - 28);
+        doc.text(textLines, 14, pageHeight - 15);
+      }
+    });
+
+    doc.save(`relatorio-${election.id}.pdf`);
   }
 
   if (!isAuthenticated || !election) {
