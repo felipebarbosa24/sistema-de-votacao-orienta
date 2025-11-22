@@ -135,7 +135,7 @@ export default function NewElectionPage() {
                       onClick={addChapa}
                       variant="outline"
                       size="sm"
-                      className="gap-2 rounded-xl bg-transparent"
+                      className="bg-[#008BDA] text-white hover:bg-[#004e84] hover:text-white gap-2 rounded-xl"
                     >
                       <PlusCircle className="h-4 w-4" />
                       Adicionar Chapa
@@ -206,7 +206,7 @@ export default function NewElectionPage() {
                   </Button>
                   <Button
                     type="submit"
-                    className="flex-1 h-12 bg-[#1e237e] hover:bg-primary-dark text-white rounded-xl font-semibold"
+                    className="flex-1 h-12 bg-success hover:bg-success/90 text-white rounded-xl font-semibold"
                   >
                     Criar Eleição
                   </Button>

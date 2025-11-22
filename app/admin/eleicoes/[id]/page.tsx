@@ -218,7 +218,7 @@ export default function ElectionDetailsPage() {
                   <div key={chapa.id} className="space-y-2">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
-                        <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary text-white font-bold">
+                        <div className="flex items-center justify-center w-10 h-10 rounded-full bg-[#1e237e] text-white font-bold">
                           {chapa.number}
                         </div>
                         <div>
@@ -237,7 +237,7 @@ export default function ElectionDetailsPage() {
                     </div>
                     <div className="w-full bg-neutral-200 rounded-full h-3 overflow-hidden">
                       <div
-                        className="bg-primary h-full rounded-full transition-all duration-500"
+                        className="bg-[#1e237e] h-full rounded-full transition-all duration-500"
                         style={{ width: `${percentage}%` }}
                       />
                     </div>
